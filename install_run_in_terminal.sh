@@ -1,11 +1,11 @@
 #!/bin/sh -
 
 #install script
-
-sudo dnf update -y
-
-sudo dnf install kernel-tools hdparm -y
-
+#TODO: Check different distros and install dependencies##
+sudo dnf update -y                                      #
+                                                        #
+sudo dnf install kernel-tools hdparm -y                 #
+#######need contributions################################
 sudo cp -v power.sh /etc/rc.d/power.sh
 sudo chmod +x /etc/rc.d/power.sh
 sudo cp -v power.service /etc/systemd/system/power.service
