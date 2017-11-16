@@ -1,0 +1,13 @@
+[Unit]
+Description=Sets the Power Management on boot according to AC mode
+Requires=multi-user.target
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/etc/rc.d/power.sh
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target 

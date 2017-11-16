@@ -1,0 +1,10 @@
+[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart='/etc/rc.d/power.sh'
+
+[Install]
+WantedBy=suspend.target
