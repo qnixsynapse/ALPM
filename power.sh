@@ -22,7 +22,7 @@ if [ $STATE == "BAT" ]
 then
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
-   /usr/sbin/iwconfig wlp3s0 power on
+#   /usr/sbin/iwconfig wlp3s0 power on
   # Device Runtime-PM
  # for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo auto > $dpcontrol; done
   # Disable nmi_watchdog
@@ -46,8 +46,8 @@ then
   
 else [ $STATE == "AC"  ] 
   echo "AC plugged in, set system to performance"
-    cpupower frequency-set -g ondemand
-    /usr/sbin/iwconfig wlp3s0 power off
+    cpupower frequency-set -g performance
+ #   /usr/sbin/iwconfig wlp3s0 power off
   # Device Runtime-PM
   #for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo on > $dpcontrol; done
   # Enable nmi_watchdog
