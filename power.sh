@@ -24,7 +24,7 @@ then
    cpupower frequency-set -g powersave
    /usr/sbin/iwconfig wlp3s0 power on
   # Device Runtime-PM
-  for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo auto > $dpcontrol; done
+ # for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo auto > $dpcontrol; done
   # Disable nmi_watchdog
     echo 0 > /proc/sys/kernel/nmi_watchdog
   # kernel write mode
@@ -39,8 +39,8 @@ then
   
   
   # sound card powersave
-    echo 10 > /sys/module/snd_hda_intel/parameters/power_save
-    echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
+    #echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+   # echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
     
  
   
@@ -49,7 +49,7 @@ else [ $STATE == "AC"  ]
     cpupower frequency-set -g ondemand
     /usr/sbin/iwconfig wlp3s0 power off
   # Device Runtime-PM
-  for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo on > $dpcontrol; done
+  #for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo on > $dpcontrol; done
   # Enable nmi_watchdog
    echo 1 > /proc/sys/kernel/nmi_watchdog
   # kernel write mode
@@ -60,7 +60,7 @@ else [ $STATE == "AC"  ]
     #Disabled SATA  link_power_management_policy known to cause SATA errors.
   #for i in /sys/class/scsi_host/host*/link_power_management_policy; do   echo max_performance > $i; done
   # sound card powersave
-    echo 300 > /sys/module/snd_hda_intel/parameters/power_save
-    echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
+    #echo 300 > /sys/module/snd_hda_intel/parameters/power_save
+    #echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
   
 fi
