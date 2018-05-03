@@ -22,7 +22,8 @@ if [ $STATE == "BAT" ]
 then
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
-#   /usr/sbin/iwconfig wlp3s0 power on
+ echo "Setting Wifi
+ /usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
   # Device Runtime-PM
  # for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo auto > $dpcontrol; done
   # Disable nmi_watchdog
@@ -31,7 +32,7 @@ then
     echo 5 > /proc/sys/vm/laptop_mode
      echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
   # disk powersave
-    hdparm -S 36 -B 128 /dev/sda &> /dev/null
+   
     
     
     #Disabled SATA  link_power_management_policy known to cause SATA errors.
@@ -47,7 +48,8 @@ then
 else [ $STATE == "AC"  ] 
   echo "AC plugged in, set system to performance"
     cpupower frequency-set -g performance
- #   /usr/sbin/iwconfig wlp3s0 power off
+    echo "Setting Wifi
+ /usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
   # Device Runtime-PM
   #for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo on > $dpcontrol; done
   # Enable nmi_watchdog
@@ -56,7 +58,7 @@ else [ $STATE == "AC"  ]
     echo 0 > /proc/sys/vm/laptop_mode
     echo 500 > /proc/sys/vm/dirty_writeback_centisecs
   # disk powersave
-    hdparm -S 0 -B 254 /dev/sda &> /dev/null
+   
     #Disabled SATA  link_power_management_policy known to cause SATA errors.
   #for i in /sys/class/scsi_host/host*/link_power_management_policy; do   echo max_performance > $i; done
   # sound card powersave
