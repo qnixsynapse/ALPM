@@ -3,14 +3,16 @@
 #Checking battery mode
 
 STATE=""
-BAT="BAT1"
+
+
+BAT="$(ls /sys/class/power_supply | grep BAT)"
 
 if [[ "$1" == "BAT" || "$1" == "AC" ]]; then
   STATE="$1"
 fi
 
 if [[ $STATE == "" ]]; then
-  if [[ $(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | grep discharging) == "" ]]; then
+  if [[ $(upower -i /org/freedesktop/UPower/devices/battery_${BAT} | grep state | grep discharging) == "" ]]; then
     STATE="AC"
   else STATE="BAT"
   fi
