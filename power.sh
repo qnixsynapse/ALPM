@@ -24,7 +24,7 @@ if [ $STATE == "BAT" ]
 then
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
- echo "Setting Wifi
+ echo "Setting Wifi"
  /usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
   # Device Runtime-PM
  # for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo auto > $dpcontrol; done
@@ -50,7 +50,7 @@ then
 else [ $STATE == "AC"  ] 
   echo "AC plugged in, set system to performance"
     cpupower frequency-set -g performance
-    echo "Setting Wifi
+    echo "Setting Wifi"
  /usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
   # Device Runtime-PM
   #for dpcontrol in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do   echo on > $dpcontrol; done
