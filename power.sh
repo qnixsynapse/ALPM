@@ -4,8 +4,14 @@
 
 STATE=""
 
-
-BAT="$(ls /sys/class/power_supply | grep BAT)"
+GETCPU=$(cat /proc/cpuinfo | grep vendor | head -n 1 | awk '{print $3}')
+if [ ${GETCPU}="GenuineIntel" ];then
+        BAT="$(ls /sys/class/power_supply | grep BAT)" 
+elif [ ${GETCPU}="AuthenticAMD" ];then
+        BAT="BAT1"
+else
+        echo -e "Your processor is currently unsupported"
+fi
 
 if [[ "$1" == "BAT" || "$1" == "AC" ]]; then
   STATE="$1"
