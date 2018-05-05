@@ -16,7 +16,7 @@ if [ $GETCPU == "GenuineIntel" ]; then
 elif [ $GETCPU == "AuthenticAMD" ]; then
         echo  "Not supported on AMD system"
 else
-        echo -e "This platform is not supported is currently unsupported"
+        echo -e "This platform is not supported"
         STATE="UNSUPPORTED"
 fi
 
