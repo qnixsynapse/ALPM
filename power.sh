@@ -22,6 +22,8 @@ echo $STATE
 
 if [ $STATE == "BAT" ]
 then
+echo "Power now:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
  echo "Setting Wifi"
@@ -44,10 +46,13 @@ then
   # sound card powersave
     #echo 10 > /sys/module/snd_hda_intel/parameters/power_save
    # echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
-    
+    echo "Power after saving on Battery:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
  
   
 else [ $STATE == "AC"  ] 
+echo "Power now:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
   echo "AC plugged in, set system to performance"
     cpupower frequency-set -g performance
     echo "Setting Wifi"
@@ -60,7 +65,8 @@ else [ $STATE == "AC"  ]
     echo 0 > /proc/sys/vm/laptop_mode
     echo 500 > /proc/sys/vm/dirty_writeback_centisecs
   # disk powersave
-   
+   echo "Power after setting on AC:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
     #Disabled SATA  link_power_management_policy known to cause SATA errors.
   #for i in /sys/class/scsi_host/host*/link_power_management_policy; do   echo max_performance > $i; done
   # sound card powersave
