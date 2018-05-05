@@ -4,8 +4,14 @@
 
 STATE=""
 
-
-BAT="$(ls /sys/class/power_supply | grep BAT)"
+GETCPU=$(cat /proc/cpuinfo | grep vendor | head -n 1 | awk '{print $3}')
+if [ ${GETCPU}="GenuineIntel" ];then
+        BAT="$(ls /sys/class/power_supply | grep BAT)" 
+elif [ ${GETCPU}="AuthenticAMD" ];then
+        BAT="BAT1"
+else
+        echo -e "Your processor is currently unsupported"
+fi
 
 if [[ "$1" == "BAT" || "$1" == "AC" ]]; then
   STATE="$1"
@@ -22,7 +28,8 @@ echo $STATE
 
 if [ $STATE == "BAT" ]
 then
-
+echo "Power now:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
  echo "Setting Wifi"
@@ -64,7 +71,8 @@ awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
     echo 0 > /proc/sys/vm/laptop_mode
     echo 500 > /proc/sys/vm/dirty_writeback_centisecs
   # disk powersave
-  
+   echo "Power after setting on AC:"
+awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
     #Disabled SATA  link_power_management_policy known to cause SATA errors.
   #for i in /sys/class/scsi_host/host*/link_power_management_policy; do   echo max_performance > $i; done
   # sound card powersave
