@@ -41,7 +41,8 @@ else
   echo "Discharging, set system to powersave"
    cpupower frequency-set -g powersave
  	echo "Setting Wifi"
- 	/usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
+	#It's told not to screenscape this tool however after doing tests we got what we wanted
+ 	/usr/sbin/iw $(iw dev | awk '$1=="Interface"{print $2}') set power_save on
   # Disable nmi_watchdog
     echo 0 > /proc/sys/kernel/nmi_watchdog
   # kernel write mode
@@ -54,7 +55,7 @@ else
   echo "AC plugged in, set system to performance"
     cpupower frequency-set -g performance
     echo "Setting Wifi"
- /usr/sbin/iw $(cat /proc/net/wireless | perl -ne '/(\w+):/ && print $1') set power_save on
+ /usr/sbin/iw $(iw dev | awk '$1=="Interface"{print $2}') set power_save on
  
   # Enable nmi_watchdog
    echo 1 > /proc/sys/kernel/nmi_watchdog
