@@ -2,12 +2,10 @@
 
 # install script
 # TODO: Check different distros and install dependencies ###
-sudo dnf update -y                                         #
-                                                           #
-sudo dnf install kernel-tools hdparm iw -y                 #
+               #
 ###### Need Contributions ##################################
-sudo cp -v power.sh /etc/rc.d/power.sh
-sudo chmod +x /etc/rc.d/power.sh
+sudo cp -v power.sh /usr/bin/power
+sudo chmod +x /usr/bin/power
 sudo cp -v power.service /etc/systemd/system/power.service
 sudo cp -v powersave.rules /etc/udev/rules.d/powersave.rules
 sudo cp -v root-resume.service /etc/systemd/system/root-resume.service

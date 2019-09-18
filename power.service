@@ -6,7 +6,7 @@ After=multi-user.target
 [Service]
 Type=oneshot
 RemainAfterExit=no
-ExecStart=/etc/rc.d/power.sh
+ExecStart=/usr/bin/power
 PermissionsStartOnly=true
 
 [Install]

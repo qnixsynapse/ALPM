@@ -8,17 +8,7 @@ BAT=$(ls /sys/class/power_supply | grep BAT)
 if [[ "$1" == "BAT" || "$1" == "AC" ]]; then
   STATE="$1"
 fi
-#Only show power value when  the system is GenuineIntel
-GETCPU=$(cat /proc/cpuinfo | grep vendor | head -n 1 | awk '{print $3}')
-echo $GETCPU
-if [ $GETCPU == "GenuineIntel" ]; then
-        awk '{print $1*10^-6 " W"}' /sys/class/power_supply/${BAT}/power_now
-elif [ $GETCPU == "AuthenticAMD" ]; then
-        echo  "Not supported on AMD system"
-else
-        echo -e "This platform is not supported"
-        STATE="UNSUPPORTED"
-fi
+
 
 #make sure we are not on a desktop
 if [[  $BAT == "" ]]; then
@@ -53,7 +43,7 @@ else
 
      
   echo "AC plugged in, set system to performance"
-    cpupower frequency-set -g performance
+    cpupower frequency-set -g ondemand
     echo "Setting Wifi"
  /usr/sbin/iw $(iw dev | awk '$1=="Interface"{print $2}') set power_save on
  

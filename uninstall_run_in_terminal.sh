@@ -3,7 +3,7 @@
 
 
 
-sudo rm -v /etc/rc.d/power.sh
+sudo rm -v /usr/bin/power
 
 sudo rm -v  /etc/systemd/system/power.service
 sudo rm -v  /etc/udev/rules.d/powersave.rules

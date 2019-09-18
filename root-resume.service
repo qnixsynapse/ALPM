@@ -4,7 +4,7 @@ After=suspend.target
 
 [Service]
 Type=simple
-ExecStart='/etc/rc.d/power.sh'
+ExecStart='/usr/bin/power'
 
 [Install]
 WantedBy=suspend.target
